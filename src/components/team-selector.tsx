@@ -49,17 +49,17 @@ export function TeamSelector({
         <div className="p-8 h-full flex flex-col items-center">
           <div className="flex items-center gap-3 mb-8">
             {type === "home" ? (
-              <Home className="w-5 h-5 text-gray-400" />
+              <Home className="w-5 h-5 text-gray-600" />
             ) : (
-              <Plane className="w-5 h-5 text-gray-400" />
+              <Plane className="w-5 h-5 text-gray-600" />
             )}
-            <h2 className="text-lg font-semibold tracking-wide text-gray-200">{title}</h2>
+            <h2 className="text-lg font-semibold tracking-wide text-gray-800">{title}</h2>
           </div>
 
           <div className="flex-grow flex items-center justify-center relative w-full">
             <button 
               onClick={onPrevious}
-              className="absolute left-0 text-gray-400 hover:text-white transition-colors"
+              className="absolute left-0 text-gray-600 hover:text-gray-800 transition-colors"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
@@ -83,14 +83,14 @@ export function TeamSelector({
                     className="w-32 h-32 mx-auto mb-6 drop-shadow-lg"
                   />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-gray-200 mb-2">{selectedTeam.name}</h3>
-                <p className="text-gray-400 text-sm">{selectedTeam.league}</p>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">{selectedTeam.name}</h3>
+                <p className="text-gray-600 text-sm">{selectedTeam.league}</p>
               </motion.div>
             </AnimatePresence>
 
             <button 
               onClick={onNext}
-              className="absolute right-0 text-gray-400 hover:text-white transition-colors"
+              className="absolute right-0 text-gray-600 hover:text-gray-800 transition-colors"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -104,10 +104,10 @@ export function TeamSelector({
             >
               <div className="flex items-center gap-3">
                 <img src={selectedTeam.logoUrl} alt={selectedTeam.name} className="w-8 h-8" />
-                <span className="font-medium text-gray-200">{selectedTeam.name}</span>
+                <span className="font-medium text-gray-800">{selectedTeam.name}</span>
               </div>
               <ChevronDown className={cn(
-                "w-5 h-5 text-gray-400 transition-transform duration-300",
+                "w-5 h-5 text-gray-600 transition-transform duration-300",
                 isOpen && "transform rotate-180"
               )} />
             </motion.button>
@@ -132,7 +132,7 @@ export function TeamSelector({
                       className="w-full px-4 py-2 flex items-center gap-3 transition-colors"
                     >
                       <img src={team.logoUrl} alt={team.name} className="w-8 h-8" />
-                      <span className="font-medium text-gray-200">{team.name}</span>
+                      <span className="font-medium text-gray-800">{team.name}</span>
                     </motion.button>
                   ))}
                 </motion.div>
