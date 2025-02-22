@@ -12,27 +12,70 @@ interface Team {
 }
 
 const teams: Team[] = [
-  { id: "arsenal", name: "London Ágyúk", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t3.png", weight: 1.0, league: "premier-league" },
-  { id: "astonvilla", name: "Aston Oroszlán", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t7.png", league: "premier-league" },
-  { id: "brentford", name: "Brentford", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t94.png", league: "premier-league" },
-  { id: "brighton", name: "Brighton", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t36.png", league: "premier-league" },
-  { id: "chelsea", name: "Chelsea", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t8.png", weight: 0.9, league: "premier-league" },
-  { id: "palace", name: "Crystal Palace", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t31.png", league: "premier-league" },
-  { id: "everton", name: "Everton", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t11.png", league: "premier-league" },
-  { id: "fulham", name: "Fulham", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t54.png", league: "premier-league" },
-  { id: "liverpool", name: "Liverpool", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t14.png", weight: 0.9, league: "premier-league" },
-  { id: "mancity", name: "Manchester Kék", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t43.png", weight: 0.8, league: "premier-league" },
-  { id: "newcastle", name: "Newcastle", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t4.png", league: "premier-league" },
-  { id: "nottingham", name: "Nottingham", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t17.png", league: "premier-league" },
-  { id: "tottenham", name: "Tottenham", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t6.png", weight: 1.1, league: "premier-league" },
-  { id: "manutd", name: "Vörös Ördögök", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t1.png", weight: 0.9, league: "premier-league" },
-  { id: "westham", name: "West Ham", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t21.png", league: "premier-league" },
-  { id: "wolves", name: "Wolverhampton", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t39.png", league: "premier-league" }
+  { id: "arsenal", name: "London Ágyúk", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t3.svg", weight: 1.0, league: "premier-league" },
+  { id: "astonvilla", name: "Aston Oroszlán", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t7.svg", league: "premier-league" },
+  { id: "brentford", name: "Brentford", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t94.svg", league: "premier-league" },
+  { id: "brighton", name: "Brighton", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t36.svg", league: "premier-league" },
+  { id: "chelsea", name: "Chelsea", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t8.svg", weight: 0.9, league: "premier-league" },
+  { id: "palace", name: "Crystal Palace", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t31.svg", league: "premier-league" },
+  { id: "everton", name: "Everton", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t11.svg", league: "premier-league" },
+  { id: "fulham", name: "Fulham", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t54.svg", league: "premier-league" },
+  { id: "liverpool", name: "Liverpool", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t14.svg", weight: 0.9, league: "premier-league" },
+  { id: "mancity", name: "Manchester Kék", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t43.svg", weight: 0.8, league: "premier-league" },
+  { id: "newcastle", name: "Newcastle", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t4.svg", league: "premier-league" },
+  { id: "nottingham", name: "Nottingham", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t17.svg", league: "premier-league" },
+  { id: "tottenham", name: "Tottenham", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t6.svg", weight: 1.1, league: "premier-league" },
+  { id: "manutd", name: "Vörös Ördögök", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t1.svg", weight: 0.9, league: "premier-league" },
+  { id: "westham", name: "West Ham", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t21.svg", league: "premier-league" },
+  { id: "wolves", name: "Wolverhampton", logoUrl: "https://resources.premierleague.com/premierleague/badges/rb/t39.svg", league: "premier-league" }
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 const Index = () => {
-  const [homeTeam, setHomeTeam] = useState(teams[0])
-  const [awayTeam, setAwayTeam] = useState(teams[1])
+  const [homeTeamIndex, setHomeTeamIndex] = useState(0)
+  const [awayTeamIndex, setAwayTeamIndex] = useState(1)
+
+  const homeTeam = teams[homeTeamIndex]
+  const awayTeam = teams[awayTeamIndex]
+
+  const handleHomeTeamChange = (direction: 'prev' | 'next') => {
+    setHomeTeamIndex(currentIndex => {
+      let newIndex
+      if (direction === 'next') {
+        newIndex = (currentIndex + 1) % teams.length
+      } else {
+        newIndex = currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
+      }
+      // Skip if it would be the same as away team
+      if (newIndex === awayTeamIndex) {
+        if (direction === 'next') {
+          newIndex = (newIndex + 1) % teams.length
+        } else {
+          newIndex = newIndex - 1 < 0 ? teams.length - 1 : newIndex - 1
+        }
+      }
+      return newIndex
+    })
+  }
+
+  const handleAwayTeamChange = (direction: 'prev' | 'next') => {
+    setAwayTeamIndex(currentIndex => {
+      let newIndex
+      if (direction === 'next') {
+        newIndex = (currentIndex + 1) % teams.length
+      } else {
+        newIndex = currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
+      }
+      // Skip if it would be the same as home team
+      if (newIndex === homeTeamIndex) {
+        if (direction === 'next') {
+          newIndex = (newIndex + 1) % teams.length
+        } else {
+          newIndex = newIndex - 1 < 0 ? teams.length - 1 : newIndex - 1
+        }
+      }
+      return newIndex
+    })
+  }
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-8 bg-gradient-to-br from-[#1a1c2e] to-[#0f1120] overflow-hidden">
@@ -74,17 +117,21 @@ const Index = () => {
             title="HAZAI CSAPAT"
             teams={teams}
             selectedTeam={homeTeam}
-            onSelect={setHomeTeam}
+            onSelect={(team) => setHomeTeamIndex(teams.findIndex(t => t.id === team.id))}
             disabledTeamId={awayTeam.id}
             type="home"
+            onPrevious={() => handleHomeTeamChange('prev')}
+            onNext={() => handleHomeTeamChange('next')}
           />
           <TeamSelector
             title="VENDÉG CSAPAT"
             teams={teams}
             selectedTeam={awayTeam}
-            onSelect={setAwayTeam}
+            onSelect={(team) => setAwayTeamIndex(teams.findIndex(t => t.id === team.id))}
             disabledTeamId={homeTeam.id}
             type="away"
+            onPrevious={() => handleAwayTeamChange('prev')}
+            onNext={() => handleAwayTeamChange('next')}
           />
         </motion.div>
       </motion.div>
