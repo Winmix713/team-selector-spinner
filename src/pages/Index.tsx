@@ -11,7 +11,6 @@ interface Team {
   league: string
 }
 
-// Updated teams data with Premier League teams
 const teams: Team[] = [
   { id: "arsenal", name: "London Ágyúk", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t3.png", weight: 1.0, league: "premier-league" },
   { id: "astonvilla", name: "Aston Oroszlán", logoUrl: "https://resources.premierleague.com/premierleague/badges/50/t7.png", league: "premier-league" },
@@ -36,20 +35,43 @@ const Index = () => {
   const [awayTeam, setAwayTeam] = useState(teams[1])
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-8 bg-gradient-to-br from-gray-900 to-gray-800">
+    <div className="min-h-screen w-full flex items-center justify-center p-8 bg-gradient-to-br from-[#1a1c2e] to-[#0f1120] overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-7xl mx-auto"
+        className="relative w-full max-w-7xl mx-auto z-10"
       >
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">Team Selection</h1>
-          <p className="text-white/80">Choose your teams for the match</p>
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-4"
+          >
+            Premier League
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-lg text-gray-400"
+          >
+            Válaszd ki a mérkőző csapatokat
+          </motion.p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center content-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center content-center relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#9b87f5]/10 to-[#0EA5E9]/10 rounded-3xl blur-3xl -z-10" />
+          
           <TeamSelector
-            title="HOME TEAM"
+            title="HAZAI CSAPAT"
             teams={teams}
             selectedTeam={homeTeam}
             onSelect={setHomeTeam}
@@ -57,14 +79,14 @@ const Index = () => {
             type="home"
           />
           <TeamSelector
-            title="AWAY TEAM"
+            title="VENDÉG CSAPAT"
             teams={teams}
             selectedTeam={awayTeam}
             onSelect={setAwayTeam}
             disabledTeamId={homeTeam.id}
             type="away"
           />
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   )
