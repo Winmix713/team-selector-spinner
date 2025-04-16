@@ -32,47 +32,15 @@ const teams: Team[] = [
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 const Index = () => {
-  const [homeTeamIndex, setHomeTeamIndex] = useState(0)
-  const [awayTeamIndex, setAwayTeamIndex] = useState(1)
+  const [selectedTeamIndex, setSelectedTeamIndex] = useState(0)
+  const selectedTeam = teams[selectedTeamIndex]
 
-  const homeTeam = teams[homeTeamIndex]
-  const awayTeam = teams[awayTeamIndex]
-
-  const handleHomeTeamChange = (direction: 'prev' | 'next') => {
-    setHomeTeamIndex(currentIndex => {
-      let newIndex
+  const handleTeamChange = (direction: 'prev' | 'next') => {
+    setSelectedTeamIndex(currentIndex => {
       if (direction === 'next') {
-        newIndex = (currentIndex + 1) % teams.length
-      } else {
-        newIndex = currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
+        return (currentIndex + 1) % teams.length
       }
-      if (newIndex === awayTeamIndex) {
-        if (direction === 'next') {
-          newIndex = (newIndex + 1) % teams.length
-        } else {
-          newIndex = newIndex - 1 < 0 ? teams.length - 1 : newIndex - 1
-        }
-      }
-      return newIndex
-    })
-  }
-
-  const handleAwayTeamChange = (direction: 'prev' | 'next') => {
-    setAwayTeamIndex(currentIndex => {
-      let newIndex
-      if (direction === 'next') {
-        newIndex = (currentIndex + 1) % teams.length
-      } else {
-        newIndex = currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
-      }
-      if (newIndex === homeTeamIndex) {
-        if (direction === 'next') {
-          newIndex = (newIndex + 1) % teams.length
-        } else {
-          newIndex = newIndex - 1 < 0 ? teams.length - 1 : newIndex - 1
-        }
-      }
-      return newIndex
+      return currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
     })
   }
 
@@ -81,8 +49,8 @@ const Index = () => {
       <Navigation />
       
       <TeamHeader 
-        name={homeTeam.name}
-        logoUrl={homeTeam.logoUrl}
+        name={selectedTeam.name}
+        logoUrl={selectedTeam.logoUrl}
         stats={{
           users: 10,
           accuracy: 87,
@@ -95,29 +63,17 @@ const Index = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center content-center relative"
+          className="flex justify-center items-center relative"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-[#9b87f5]/10 to-[#0EA5E9]/10 rounded-3xl blur-3xl -z-10" />
           
           <TeamSelector
             title="HAZAI CSAPAT"
             teams={teams}
-            selectedTeam={homeTeam}
-            onSelect={(team) => setHomeTeamIndex(teams.findIndex(t => t.id === team.id))}
-            disabledTeamId={awayTeam.id}
-            type="home"
-            onPrevious={() => handleHomeTeamChange('prev')}
-            onNext={() => handleHomeTeamChange('next')}
-          />
-          <TeamSelector
-            title="VENDÉG CSAPAT"
-            teams={teams}
-            selectedTeam={awayTeam}
-            onSelect={(team) => setAwayTeamIndex(teams.findIndex(t => t.id === team.id))}
-            disabledTeamId={homeTeam.id}
-            type="away"
-            onPrevious={() => handleAwayTeamChange('prev')}
-            onNext={() => handleAwayTeamChange('next')}
+            selectedTeam={selectedTeam}
+            onSelect={(team) => setSelectedTeamIndex(teams.findIndex(t => t.id === team.id))}
+            onPrevious={() => handleTeamChange('prev')}
+            onNext={() => handleTeamChange('next')}
           />
         </motion.div>
       </div>

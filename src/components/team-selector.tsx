@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card } from "@/components/ui/card"
-import { ChevronDown, Home, Plane, ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, Trophy } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface Team {
@@ -18,8 +18,6 @@ interface TeamSelectorProps {
   teams: Team[]
   selectedTeam: Team
   onSelect: (team: Team) => void
-  disabledTeamId?: string
-  type: "home" | "away"
   onPrevious: () => void
   onNext: () => void
 }
@@ -28,15 +26,11 @@ export function TeamSelector({
   title, 
   teams, 
   selectedTeam, 
-  onSelect, 
-  disabledTeamId, 
-  type,
+  onSelect,
   onPrevious,
   onNext 
 }: TeamSelectorProps) {
   const [isOpen, setIsOpen] = useState(false)
-
-  const filteredTeams = teams.filter(team => team.id !== disabledTeamId)
 
   return (
     <motion.div
@@ -48,11 +42,7 @@ export function TeamSelector({
       <Card className="glass-card h-[var(--team-card-height)] rounded-3xl relative overflow-visible">
         <div className="p-8 h-full flex flex-col items-center">
           <div className="flex items-center gap-3 mb-8">
-            {type === "home" ? (
-              <Home className="w-5 h-5 text-gray-600" />
-            ) : (
-              <Plane className="w-5 h-5 text-gray-600" />
-            )}
+            <Trophy className="w-5 h-5 text-gray-600" />
             <h2 className="text-lg font-semibold tracking-wide text-gray-800">{title}</h2>
           </div>
 
@@ -121,7 +111,7 @@ export function TeamSelector({
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   className="absolute bottom-full mb-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 py-2 dropdown-blur team-dropdown-content z-50"
                 >
-                  {filteredTeams.map((team) => (
+                  {teams.map((team) => (
                     <motion.button
                       key={team.id}
                       whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}
