@@ -1,6 +1,5 @@
 import { TeamSelector } from "@/components/team-selector"
 import { Navigation } from "@/components/navigation"
-import { TeamHeader } from "@/components/team-header"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
@@ -45,38 +44,68 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#0f1120] overflow-x-hidden">
+    <div className="min-h-screen w-full bg-black text-gray-300 overflow-x-hidden">
       <Navigation />
       
-      <TeamHeader 
-        name={selectedTeam.name}
-        logoUrl={selectedTeam.logoUrl}
-        stats={{
-          users: 10,
-          accuracy: 87,
-          tipsPerDay: 5
-        }}
-      />
+      <main>
+        <section className="relative min-h-[80vh] flex items-center pt-28 pb-16 overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-blue-950/20 to-black/95" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(59,130,246,0.15),transparent_45%)]" />
+            <div className="absolute inset-0 opacity-30" style={{
+              backgroundImage: "radial-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px)",
+              backgroundSize: "30px 30px"
+            }} />
+          </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6 }}
-          className="flex justify-center items-center relative"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#9b87f5]/10 to-[#0EA5E9]/10 rounded-3xl blur-3xl -z-10" />
-          
-          <TeamSelector
-            title="HAZAI CSAPAT"
-            teams={teams}
-            selectedTeam={selectedTeam}
-            onSelect={(team) => setSelectedTeamIndex(teams.findIndex(t => t.id === team.id))}
-            onPrevious={() => handleTeamChange('prev')}
-            onNext={() => handleTeamChange('next')}
-          />
-        </motion.div>
-      </div>
+          {/* Hero Content */}
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Left Column: Text Content */}
+              <motion.div 
+                className="space-y-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="inline-flex items-center gap-2 py-2 px-4 bg-gradient-to-r from-blue-500/10 to-blue-500/5 border border-blue-500/20 rounded-full backdrop-blur-sm">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                  </span>
+                  <p className="text-xs font-medium text-blue-300">Tippelj mérkőzésekre és nyerj jutalmakat</p>
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                  <span className="block mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-300">
+                    Emeld új szintre
+                  </span>
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500">
+                    mérkőzés tippjeidet
+                  </span>
+                </h1>
+              </motion.div>
+
+              {/* Right Column: Team Selector Card */}
+              <motion.div 
+                className="relative mx-auto lg:mx-0"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <TeamSelector
+                  title="HAZAI CSAPAT"
+                  teams={teams}
+                  selectedTeam={selectedTeam}
+                  onSelect={(team) => setSelectedTeamIndex(teams.findIndex(t => t.id === team.id))}
+                  onPrevious={() => handleTeamChange('prev')}
+                  onNext={() => handleTeamChange('next')}
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }
