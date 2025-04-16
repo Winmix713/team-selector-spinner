@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Users, BarChart2 } from "lucide-react"
 
 interface TeamHeaderProps {
   name: string
