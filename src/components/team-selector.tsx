@@ -39,17 +39,17 @@ export function TeamSelector({
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className="w-full max-w-[var(--team-card-width)]"
     >
-      <Card className="glass-card h-[var(--team-card-height)] rounded-3xl relative overflow-visible">
+      <Card className="glass-card h-[var(--team-card-height)] rounded-3xl relative overflow-visible border border-white/10 bg-gradient-to-br from-gray-900/80 via-gray-900/70 to-gray-900/80 backdrop-blur-xl shadow-[0_30px_60px_rgba(0,0,0,0.4)]">
         <div className="p-8 h-full flex flex-col items-center">
           <div className="flex items-center gap-3 mb-8">
-            <Trophy className="w-5 h-5 text-gray-600" />
-            <h2 className="text-lg font-semibold tracking-wide text-gray-800">{title}</h2>
+            <Trophy className="w-5 h-5 text-blue-400" />
+            <h2 className="text-lg font-semibold tracking-wide text-white">{title}</h2>
           </div>
 
           <div className="flex-grow flex items-center justify-center relative w-full">
             <button 
               onClick={onPrevious}
-              className="absolute left-0 text-gray-600 hover:text-gray-800 transition-colors"
+              className="absolute left-0 text-gray-600 hover:text-white transition-colors"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
@@ -67,20 +67,22 @@ export function TeamSelector({
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  <img
-                    src={selectedTeam.logoUrl}
-                    alt={selectedTeam.name}
-                    className="w-32 h-32 mx-auto mb-6 drop-shadow-lg"
-                  />
+                  <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-xl border border-white/5 p-4 flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                    <img
+                      src={selectedTeam.logoUrl}
+                      alt={selectedTeam.name}
+                      className="w-full h-full object-contain drop-shadow-lg"
+                    />
+                  </div>
                 </motion.div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">{selectedTeam.name}</h3>
-                <p className="text-gray-600 text-sm">{selectedTeam.league}</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{selectedTeam.name}</h3>
+                <p className="text-blue-400 text-sm">{selectedTeam.league}</p>
               </motion.div>
             </AnimatePresence>
 
             <button 
               onClick={onNext}
-              className="absolute right-0 text-gray-600 hover:text-gray-800 transition-colors"
+              className="absolute right-0 text-gray-600 hover:text-white transition-colors"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -93,11 +95,13 @@ export function TeamSelector({
               className="w-full bg-white/5 hover:bg-white/10 rounded-xl p-4 flex items-center justify-between transition-colors border border-white/10"
             >
               <div className="flex items-center gap-3">
-                <img src={selectedTeam.logoUrl} alt={selectedTeam.name} className="w-8 h-8" />
-                <span className="font-medium text-gray-800">{selectedTeam.name}</span>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-xl border border-white/5 p-1 flex items-center justify-center">
+                  <img src={selectedTeam.logoUrl} alt={selectedTeam.name} className="w-full h-full object-contain" />
+                </div>
+                <span className="font-medium text-white">{selectedTeam.name}</span>
               </div>
               <ChevronDown className={cn(
-                "w-5 h-5 text-gray-600 transition-transform duration-300",
+                "w-5 h-5 text-gray-400 transition-transform duration-300",
                 isOpen && "transform rotate-180"
               )} />
             </motion.button>
@@ -109,7 +113,7 @@ export function TeamSelector({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="absolute bottom-full mb-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 py-2 dropdown-blur team-dropdown-content z-50"
+                  className="absolute bottom-full mb-2 w-full backdrop-blur-xl bg-gray-900/95 rounded-xl border border-white/10 py-2 shadow-lg z-50"
                 >
                   {teams.map((team) => (
                     <motion.button
@@ -121,8 +125,10 @@ export function TeamSelector({
                       }}
                       className="w-full px-4 py-2 flex items-center gap-3 transition-colors"
                     >
-                      <img src={team.logoUrl} alt={team.name} className="w-8 h-8" />
-                      <span className="font-medium text-gray-800">{team.name}</span>
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-xl border border-white/5 p-1 flex items-center justify-center">
+                        <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain" />
+                      </div>
+                      <span className="font-medium text-white">{team.name}</span>
                     </motion.button>
                   ))}
                 </motion.div>
