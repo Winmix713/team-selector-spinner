@@ -1,5 +1,6 @@
-
 import { TeamSelector } from "@/components/team-selector"
+import { Navigation } from "@/components/navigation"
+import { TeamHeader } from "@/components/team-header"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
@@ -45,7 +46,6 @@ const Index = () => {
       } else {
         newIndex = currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
       }
-      // Skip if it would be the same as away team
       if (newIndex === awayTeamIndex) {
         if (direction === 'next') {
           newIndex = (newIndex + 1) % teams.length
@@ -65,7 +65,6 @@ const Index = () => {
       } else {
         newIndex = currentIndex - 1 < 0 ? teams.length - 1 : currentIndex - 1
       }
-      // Skip if it would be the same as home team
       if (newIndex === homeTeamIndex) {
         if (direction === 'next') {
           newIndex = (newIndex + 1) % teams.length
@@ -78,33 +77,20 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-8 bg-gradient-to-br from-[#1a1c2e] to-[#0f1120] overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+    <div className="min-h-screen w-full bg-[#0f1120] overflow-x-hidden">
+      <Navigation />
       
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative w-full max-w-7xl mx-auto z-10"
-      >
-        <div className="text-center mb-12">
-          <motion.h1 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-5xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-4"
-          >
-            Premier League
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg text-gray-400"
-          >
-            Válaszd ki a mérkőző csapatokat
-          </motion.p>
-        </div>
-        
+      <TeamHeader 
+        name={homeTeam.name}
+        logoUrl={homeTeam.logoUrl}
+        stats={{
+          users: 10,
+          accuracy: 87,
+          tipsPerDay: 5
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -134,7 +120,7 @@ const Index = () => {
             onNext={() => handleAwayTeamChange('next')}
           />
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   )
 }
