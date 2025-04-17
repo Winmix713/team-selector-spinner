@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Liga Soccer theme colors
+				liga: {
+					background: '#121214',
+					card: '#1A1A1C',
+					accent: '#4ade80',
+					blue: '#3b82f6',
+					yellow: '#facc15',
+					red: '#ef4444',
+					text: '#ffffff',
+					'text-muted': '#94a3b8',
 				}
 			},
 			borderRadius: {
