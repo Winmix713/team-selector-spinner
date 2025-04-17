@@ -1,5 +1,6 @@
 
 import React from 'react';
+
 // components
 import { Header as PageHeader } from '../components/layout/Header';
 import AppGrid from '../layout/AppGrid';
@@ -15,7 +16,8 @@ import WidgetGroup from '../components/WidgetGroup';
 import PlayerDiscipline from '../widgets/PlayerDiscipline';
 import PlayerBasicCard from '../components/PlayerBasicCard';
 
-const widgets = {
+// Define the widgets object with proper React element typing
+const widgets: Record<string, React.ReactNode> = {
     player_cards: <WidgetGroup>
         <PlayerBasicCard/>
         <PlayerDiscipline/>
@@ -28,15 +30,15 @@ const widgets = {
     championship_position: <ChampionshipPositionChart />,
     team_compare: <TeamCompareChart />,
     live_matches: <LiveMatches variant="small" />
-}
+};
 
-const Statistics = () => {
+const Statistics: React.FC = () => {
     return (
         <>
             <PageHeader title="Statistics" />
             <AppGrid id="statistics" widgets={widgets}/>
         </>
-    )
-}
+    );
+};
 
-export default Statistics
+export default Statistics;

@@ -6,6 +6,7 @@ import ChartTooltip from '@ui/ChartTooltip';
 
 // hooks
 import {useThemeProvider} from '@contexts/themeContext';
+import styled from 'styled-components';
 
 const CustomScatterShape = ({cx, cy, fill, ...props}) => {
     return (

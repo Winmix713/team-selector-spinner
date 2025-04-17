@@ -1,5 +1,4 @@
-// styling
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import theme from 'styled-theming';
 
 // hooks
