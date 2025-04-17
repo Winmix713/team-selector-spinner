@@ -86,6 +86,7 @@
     "react-use-measure": "^2.1.7",
     "recharts": "^2.12.7",
     "rtl-detect": "^1.1.2",
+    "sass-embedded": "^1.86.3",
     "sonner": "^1.5.0",
     "styled-components": "^6.1.17",
     "styled-theming": "^2.2.0",
