@@ -5,21 +5,21 @@ module.exports = {
     es2020: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  parser: '@typescript-eslint/parser',
+  parser: '@babel/eslint-parser', // vagy '@typescript-eslint/parser' TypeScript esetén
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: 2021,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
   },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended', // TypeScript esetén
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+  ],
   plugins: [
     'react',
     '@typescript-eslint',
