@@ -1,5 +1,5 @@
 // styling
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 // components
 import Progress from '@ui/Progress';

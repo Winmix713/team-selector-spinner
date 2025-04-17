@@ -1,0 +1,59 @@
+
+.container {
+    padding: 16px;
+    border-radius: 8px;
+    background: var(--widget);
+    border: 1px solid var(--border);
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--header);
+}
+
+.goals {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.playerGoal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.playerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.playerName {
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.playerTime {
+    font-size: 0.75rem;
+    color: var(--muted-text);
+}
+
+.goalIcon {
+    width: 24px;
+    height: 24px;
+    color: var(--highlight);
+    
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
