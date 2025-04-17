@@ -1,77 +1,56 @@
 
 // styling
-import styled from 'styled-components';
+import styles from './styles.module.scss'
 
 // components
-import Spring from '@components/Spring';
-import PlayerInfo from '@components/PlayerInfo';
+import LazyImage from '../../components/LazyImage';
 
 // hooks
-import { useThemeProvider } from '@contexts/themeContext';
+import {useThemeProvider} from '../../contexts/themeContext';
 
-// assets
-import BarSvg from '@assets/bar.svg';
+// utils
+import {getClubInfo} from '../../utils/helpers';
+import PropTypes from 'prop-types';
 
-const StyledFooter = styled.div`
-    padding: 28px 30px;
-`;
+const PlayerDiscipline = ({clubID = 'realmadrid', firstName = 'Manuel', lastName = 'Neuer', red = 1, yellow = 6}) => {
+    const club = getClubInfo(clubID);
+    const {direction} = useThemeProvider();
 
-const CardWrapper = styled.div``;
-
-const Card = styled.span`
-    display: block;
-    width: 12px;
-    height: 17px;
-    border-radius: 2px;
-
-    &.red {
-        background: #E0162E;
-        border: 2px solid #910C0C;
+    const drawYellowCards = () => {
+        return Array(yellow).fill(0).map((_, i) => <span key={i} className={`${styles.card} ${styles.yellow} ${styles[direction]}`}/>)
     }
 
-    &.yellow {
-        background: #F9C700;
-        border: 2px solid #A37F00;
-        position: relative;
-
-        &.ltr:not(:first-child) {
-            margin-left: -6px;
-        }
-
-        &.rtl:not(:first-child) {
-            margin-right: -6px;
-        }
-    }
-`;
-
-const PlayerDiscipline = () => {
-    const { direction } = useThemeProvider();
-    
     return (
-        <Spring className="card h-1 d-flex flex-column justify-content-between">
-            <PlayerInfo wrapperClass="card-padded"
-                        title="Romelu Lukaku"
-                        subtitle="Discipline record"
-                        number={4}/>
-            <StyledFooter className="card_footer border-top d-flex flex-column g-16">
-                <div className="d-flex align-items-center justify-content-between">
-                    <h3>3</h3>
-                    <CardWrapper className="d-flex" style={{ transform: 'scaleX(-1)' }}>
-                        <Card className={`yellow ${direction}`}/>
-                        <Card className={`yellow ${direction}`}/>
-                        <Card className={`yellow ${direction}`}/>
-                    </CardWrapper>
+        <div className="card h-1 d-flex flex-column g-20">
+            <div className="card_header d-flex flex-column g-16 flex-1">
+                <LazyImage className="club-logo club-logo--md" src={club.logo} alt={club.name} />
+                <h3>
+                    {firstName}
+                    <span className="d-block">{lastName}</span>
+                </h3>
+            </div>
+            <div className="card_footer--sm justify-content-between">
+                <div className="d-flex align-items-center g-8">
+                    <div className={styles.card_wrapper}>
+                        {drawYellowCards()}
+                    </div>
+                    <span className="label h6">{yellow}</span>
                 </div>
-                <img src={BarSvg} alt="Bar" style={{ color: 'var(--accent)' }}/>
-                <div className="d-flex align-items-center justify-content-between">
-                    <h3>1</h3>
-                    <CardWrapper className="d-flex" style={{ transform: 'scaleX(-1)' }}>
-                        <Card className="red"/>
-                    </CardWrapper>
+                <div className="d-flex align-items-center g-8">
+                    <span className={`${styles.card} ${styles.red}`}/>
+                    <span className="label h6">{red}</span>
                 </div>
-            </StyledFooter>
-        </Spring>
-    );
-};
+            </div>
+        </div>
+    )
+}
 
-export default PlayerDiscipline;
+PlayerDiscipline.propTypes = {
+    clubID: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    red: PropTypes.number,
+    yellow: PropTypes.number
+}
+
+export default PlayerDiscipline

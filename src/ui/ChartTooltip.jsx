@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+// styling
+import styled from 'styled-components/macro';
 
 export const StyledTooltip = styled.div`
   background: var(--tooltip-bg);
